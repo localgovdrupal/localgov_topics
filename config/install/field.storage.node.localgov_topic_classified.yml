@@ -4,8 +4,8 @@ dependencies:
   module:
     - node
     - taxonomy
-id: node.field_topic_term
-field_name: field_topic_term
+id: node.localgov_topic_classified
+field_name: localgov_topic_classified
 entity_type: node
 type: entity_reference
 settings:
