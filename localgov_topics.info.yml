@@ -1,6 +1,6 @@
-name: LocalGovDrupal Topics
+name: LocalGov Topics
 description: Topic taxonomy and related functionality for the LocalGovDrupal distribution.
-package: LocalGovDrupal
+package: LocalGov Drupal
 type: module
 core_version_requirement: ^8.8 || ^9
 
