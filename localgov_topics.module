@@ -1,0 +1,26 @@
+<?php
+
+/**
+ * @file
+ * Localgov topics module file.
+ */
+
+use Drupal\localgov_roles\RolesHelper;
+
+/**
+ * Implements hook_localgov_roles_default().
+ */
+function localgov_topics_localgov_roles_default(): array {
+
+  // Grant edit topic permissions to localgov roles.
+  $topic_permissions = [
+    'create terms in localgov_topic',
+    'delete terms in localgov_topic',
+    'edit terms in localgov_topic',
+  ];
+  $perms = [
+    RolesHelper::EDITOR_ROLE => $topic_permissions,
+  ];
+
+  return $perms;
+}
