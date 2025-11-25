@@ -6,6 +6,7 @@ namespace Drupal\Tests\localgov_topics\Functional;
 
 use Drupal\Tests\BrowserTestBase;
 use Drupal\taxonomy\Entity\Term;
+use Drupal\user\Entity\Role;
 use Drupal\user\RoleInterface;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -187,7 +188,7 @@ class TopicPermissionsTest extends BrowserTestBase {
    */
   public function testEditorRoleHasTopicPermissions(): void {
     // Install the localgov_roles module which should grant permissions.
-    $editor = \Drupal\user\Entity\Role::load('localgov_editor');
+    $editor = Role::load('localgov_editor');
 
     $this->assertNotEmpty($editor, 'Editor role exists');
     $this->assertTrue($editor->hasPermission('create terms in localgov_topic'), 'Editor can create topics');
@@ -200,19 +201,19 @@ class TopicPermissionsTest extends BrowserTestBase {
    */
   public function testOtherRolesDoNotHaveTopicPermissions(): void {
     // Check anonymous role.
-    $anonymous = \Drupal\user\Entity\Role::load(RoleInterface::ANONYMOUS_ID);
+    $anonymous = Role::load(RoleInterface::ANONYMOUS_ID);
     $this->assertFalse($anonymous->hasPermission('create terms in localgov_topic'), 'Anonymous cannot create topics');
     $this->assertFalse($anonymous->hasPermission('edit terms in localgov_topic'), 'Anonymous cannot edit topics');
     $this->assertFalse($anonymous->hasPermission('delete terms in localgov_topic'), 'Anonymous cannot delete topics');
 
     // Check authenticated role.
-    $authenticated = \Drupal\user\Entity\Role::load(RoleInterface::AUTHENTICATED_ID);
+    $authenticated = Role::load(RoleInterface::AUTHENTICATED_ID);
     $this->assertFalse($authenticated->hasPermission('create terms in localgov_topic'), 'Authenticated cannot create topics');
     $this->assertFalse($authenticated->hasPermission('edit terms in localgov_topic'), 'Authenticated cannot edit topics');
     $this->assertFalse($authenticated->hasPermission('delete terms in localgov_topic'), 'Authenticated cannot delete topics');
 
     // Check author role (if it exists).
-    $author = \Drupal\user\Entity\Role::load('localgov_author');
+    $author = Role::load('localgov_author');
     if ($author) {
       $this->assertFalse($author->hasPermission('create terms in localgov_topic'), 'Author cannot create topics');
       $this->assertFalse($author->hasPermission('edit terms in localgov_topic'), 'Author cannot edit topics');
