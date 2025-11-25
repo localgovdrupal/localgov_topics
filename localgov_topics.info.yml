@@ -7,3 +7,4 @@ container_rebuild_required: true
 
 dependencies:
   - drupal:taxonomy
+  - localgov_core:localgov_roles
